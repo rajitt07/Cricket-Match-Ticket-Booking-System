@@ -1,0 +1,90 @@
+-- Create the database
+CREATE DATABASE IF NOT EXISTS project;
+
+-- Use the database
+USE project;
+
+-- Create the users table
+CREATE TABLE IF NOT EXISTS users (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    full_name VARCHAR(255) NOT NULL,
+    phone_number VARCHAR(15) UNIQUE NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL, -- In a real application, store hashed passwords!
+    state VARCHAR(100)
+);
+
+-- Create the sports table (based on the provided image and adding ticket price)
+CREATE TABLE IF NOT EXISTS sports (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    city_name VARCHAR(100) NOT NULL,
+    ground_name VARCHAR(255) NOT NULL,
+    pavilion_name VARCHAR(255) NOT NULL,
+    ticket_price DECIMAL(10, 2) NOT NULL
+);
+
+-- Create the bookings table
+CREATE TABLE IF NOT EXISTS bookings (
+    booking_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    city VARCHAR(100) NOT NULL,
+    stadium_name VARCHAR(255) NOT NULL,
+    pavilion_name VARCHAR(255) NOT NULL,
+    num_tickets INT NOT NULL,
+    total_cost DECIMAL(10, 2) NOT NULL,
+    booking_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
+-- Insert data into the sports table (based on your image and assumed prices)
+-- You can adjust ticket prices as needed
+INSERT INTO sports (city_name, ground_name, pavilion_name, ticket_price) VALUES
+('banglore', 'Chinnaswamy Stadium', 'Anil Kumble Pavilion', 2500.00),
+('banglore', 'Chinnaswamy Stadium', 'Rahul Dravid Pavilion', 2000.00),
+('banglore', 'Chinnaswamy Stadium', 'Syed Mustaq Ali Pavilion', 1500.00),
+('banglore', 'Chinnaswamy Stadium', 'Sunil Joshi Pavilion', 1000.00),
+
+('chennai', 'Chiddhambaram Stadium', 'George Abraham Pavilion', 2500.00),
+('chennai', 'Chiddhambaram Stadium', 'Antony Adams Pavilion', 2000.00),
+('chennai', 'Chiddhambaram Stadium', 'Habib Ahmed Pavilion', 1500.00),
+('chennai', 'Chiddhambaram Stadium', 'Balu Alaganan Pavilion', 1500.00),
+
+('nagpur', 'Vidharbha Cricket Association Stadium', 'Vijay Hazare Pavilion', 3000.00),
+('nagpur', 'Vidharbha Cricket Association Stadium', 'Chetan Chauhan Pavilion', 2000.00),
+('nagpur', 'Vidharbha Cricket Association Stadium', 'Surendra Bhave Pavilion', 1000.00),
+('nagpur', 'Vidharbha Cricket Association Stadium', 'Santosh Jedhe Pavilion', 4000.00),
+
+('pune', 'Maharashtra Cricket Association Stadium', 'Munaf Patel Pavilion', 3000.00),
+('pune', 'Maharashtra Cricket Association Stadium', 'Ashutosh Aghashe Pavilion', 1000.00),
+('pune', 'Maharashtra Cricket Association Stadium', 'Kedar Jadhav Pavilion', 6000.00),
+('pune', 'Maharashtra Cricket Association Stadium', 'Rahul Tripathi Pavilion', 2000.00),
+
+('gujarat', 'Saurashtra Cricket Association Stadium', 'Madhusudhan Rege Pavilion', 2000.00),
+('gujarat', 'Saurashtra Cricket Association Stadium', 'Iqbal Siddiqui Pavilion', 3000.00),
+('gujarat', 'Saurashtra Cricket Association Stadium', 'Ranga Sahoni Pavilion', 750.00),
+('gujarat', 'Saurashtra Cricket Association Stadium', 'Ruturaj Gaikwad Pavilion', 4000.00),
+
+('mumbai', 'Wankhede Stadium', 'Gaware Pavilion', 2000.00),
+('mumbai', 'Wankhede Stadium', 'Vijay Merchant Pavilion', 4000.00),
+('mumbai', 'Wankhede Stadium', 'Grand Stand Pavilion', 10000.00),
+('mumbai', 'Wankhede Stadium', 'Boxes Pavilion', 7000.00),
+
+('delhi', 'Arun Jaitley Stadium', 'Yogesh Nagar Pavilion', 3000.00),
+('delhi', 'Arun Jaitley Stadium', 'Rajat Bhatia Pavilion', 1000.00),
+('delhi', 'Arun Jaitley Stadium', 'Pradeep Sangwan Pavilion', 10000.00),
+('delhi', 'Arun Jaitley Stadium', 'Ashok Gandotra Pavilion', 6000.00),
+
+('kolkata', 'Eden Gardens', 'Vijay Hazare Pavilion', 3000.00),
+('kolkata', 'Eden Gardens', 'Chetan Chauhan Pavilion', 2000.00),
+('kolkata', 'Eden Gardens', 'Surendra Bhave Pavilion', 1000.00),
+('kolkata', 'Eden Gardens', 'Santosh Jedhe Pavilion', 4000.00),
+
+('hyderabad', 'Rajiv Gandhi International Cricket Stadium', 'Virendra Sehwag Pavilion', 2000.00),
+('hyderabad', 'Rajiv Gandhi International Cricket Stadium', 'Rishab Pant Pavilion', 1000.00),
+('hyderabad', 'Rajiv Gandhi International Cricket Stadium', 'Prakash Bhandari Pavilion', 4000.00),
+('hyderabad', 'Rajiv Gandhi International Cricket Stadium', 'Man Sood Pavilion', 5000.00),
+
+('kochi', 'Jawaharlal Nehru Stadium', 'Ranjider Pal Pavilion', 1000.00),
+('kochi', 'Jawaharlal Nehru Stadium', 'Navdeep Saini Pavilion', 3000.00),
+('kochi', 'Jawaharlal Nehru Stadium', 'Ajay Sharma Pavilion', 8000.00),
+('kochi', 'Jawaharlal Nehru Stadium', 'Sanjeev Sharma Pavilion', 10000.00);
